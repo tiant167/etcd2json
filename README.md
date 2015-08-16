@@ -7,6 +7,7 @@ turn etcd configs to json
 - If the name of `Dictionary` or `Property` is a number, then the parent node will be casted into an `Array`
 - String `true` and `false` will be turned into Boolean
 - If number and letter key name exists in the same level, the final result will be decided by the last element.
+- Empty `Property` and `Dictionary` will be turned into `''` and `{}`
 
 ## Usage
 ```javascript
@@ -22,25 +23,44 @@ You can pass an array to `retrieveMulti` function. The latter value will overwri
 
 ## Examples
 ### Etcd Configs
-- + v1
--- + production
---- + default
----- - mongoUrl: localhost
----- - rabbitmqUrl: localhost
----- + redis:
------ + 1
------- - host: 127.0.0.1
------- - port: 3306
------ + 2
------- - host: 127.0.0.2
------- - port: 3306
---- + app1
----- - mongoUrl: 127.0.0.1:12345
----- - isDeploy: true
----- + elasticSearch
------ - 1: 127.0.0.1:9200
------ - 2: 127.0.0.2:9200
------ - 3: 127.0.0.3:9200
+<ul>
+  <li>+ v1</li>
+  <ul>
+    <li>+ production</li>
+    <ul>
+      <li>+ default</li>
+      <ul>
+        <li>- mongoUrl: localhost</li>
+        <li>- rabbitmqUrl: localhost</li>
+        <li>+ redis:</li>
+        <ul>
+          <li>+ 1</li>
+          <ul>
+            <li>- host: 127.0.0.1</li>
+            <li>- port: 3306</li>
+          </ul>
+          <li>+ 2</li>
+          <ul>
+            <li>- host: 127.0.0.2</li>
+            <li>- port: 3306</li>
+          </ul>
+        </ul>
+      </ul>
+      <li>+ app1</li>
+      <ul>
+        <li>- mongoUrl: 127.0.0.1:12345</li>
+        <li>- isDeploy: true</li>
+        <li>- special: <i>(Empty)</i></li>
+        <li>+ elasticSearch</li>
+        <ul>
+          <li>- 1: 127.0.0.1:9200</li>
+          <li>- 1: 127.0.0.2:9200</li>
+          <li>- 1: 127.0.0.2:9200</li>
+        </ul>
+      </ul>
+    </ul>
+  </ul>
+</ul>
 
 ### JSON Result
 ```
@@ -48,6 +68,7 @@ You can pass an array to `retrieveMulti` function. The latter value will overwri
   "mongoUrl": "127.0.0.1:12345",
   "rabbitmqUrl": "localhost",
   "isDeploy": true,
+  "special": "",
   "redis": [
     {
       host: "127.0.0.1",
