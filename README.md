@@ -15,11 +15,11 @@ var etcd2json = require('etcd2json');
 var etcdHosts = process.env.ETCD_HOST.split(',') || ['127.0.0.1:2379'];
 var etcdClient = new Etcd(etcdHosts);
 var defaultResult = etcd2json.retrieve(etcdClient, '/v1/production/default');
-var appResult = etcd2json.retrieveMulti(etcdClient, ['/v1/production/default', '/v1/production/app1']);
+var appResult = etcd2json.retrieveMultiPath(etcdClient, ['/v1/production/default', '/v1/production/app1']);
 ```
 
-There are two functions, `retrieve` and `retrieveMulti`.
-You can pass an array to `retrieveMulti` function. The latter value will overwrite the previous value, if they have the same key.
+There are two functions, `retrieve` and `retrieveMultiPath`.
+You can pass an array to `retrieveMultiPath` function. The latter value will overwrite the previous value, if they have the same key.
 
 ## Examples
 ### Etcd Configs
