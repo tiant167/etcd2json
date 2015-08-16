@@ -1,0 +1,26 @@
+{
+  "name": "etcd2json",
+  "version": "0.0.1",
+  "description": "turn etcd configs to json",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo 'no test'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tiant167/etcd2json.git"
+  },
+  "keywords": [
+    "etcd",
+    "json"
+  ],
+  "author": "haotianchai",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tiant167/etcd2json/issues"
+  },
+  "homepage": "https://github.com/tiant167/etcd2json",
+  "dependencies": {
+    "lodash": "^3.10.1"
+  }
+}
