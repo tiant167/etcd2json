@@ -8,6 +8,7 @@ var etcdConfigs = module.exports = {
     var objResult = {};
     var arrResult = [];
     var result = objResult;
+    if(_.isEmpty(req.body)) return null;
     _.forEach(req.body.node.nodes, function(n) {
       // key is the node name without path
       var subKey = n.key.slice(path.length + 1);
@@ -37,7 +38,15 @@ var etcdConfigs = module.exports = {
     });
     return result;
   },
-
+  random: function random(etcdClient,path){
+    var list = etcdConfigs.retrieve(etcdClient,path);
+    var keys = _.keys(list);
+    if(keys.length == 0){
+      return list[keys[0]];
+    }else{
+      return list[keys[_.random(0,keys.length-1)]];
+    }
+  },
   retrieveMultiPath: function retrieveMultiPath(etcdClient, paths){
     var result = {};
     if (_.isArray(paths)){
